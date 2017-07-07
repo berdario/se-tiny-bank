@@ -6,7 +6,7 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 @TestFor(TinyBankController)
-@Mock([Account, Transaction])
+@Mock([Account, Transfer])
 class TinyBankControllerSpec extends Specification {
 
     def setup() {
@@ -26,9 +26,9 @@ class TinyBankControllerSpec extends Specification {
             account.hasProperty("balance")
     }
 
-    void "test Transaction has correct fields"() {
+    void "test Transfer has correct fields"() {
         given:
-            Transaction transaction = new Transaction()
+            Transfer transaction = new Transfer()
         expect:
             transaction.hasProperty("debit")
             transaction.hasProperty("credit")
@@ -52,7 +52,7 @@ class TinyBankControllerSpec extends Specification {
             params.cr = cr.id
             params.amt = 12
             controller.doPayment()
-            def transactions = Transaction.list()
+            def transactions = Transfer.list()
         then:
             dr.balance == 212
             cr.balance == 188

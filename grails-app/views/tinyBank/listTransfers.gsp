@@ -8,11 +8,11 @@
 <body>
 <div style="padding:10px;">
     <i style="color: #18aa81">${request.message}</i>
-    <h2>Transactions</h2>
+    <h2>Transfers</h2>
     <g:link action="pay">Pay someone</g:link>
     <br/>
     <br/>
-    <g:form name="transaction" action="listTransactions">
+    <g:form name="transaction" action="listTransfers">
         <b>Person:</b>
         <g:select name="account.id"
                   from="${Account.list()}"
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
         <g:set var="account" value="${Account.read(params.account.id as long)}"/>
-        <g:each in="${Transaction.findAllByCreditOrDebit(account, account)}" var="transaction">
+        <g:each in="${Transfer.findAllByCreditOrDebit(account, account)}" var="transaction">
             <tr>
                 <td>${transaction.id}</td>
                 <td>${transaction.credit.name}</td>

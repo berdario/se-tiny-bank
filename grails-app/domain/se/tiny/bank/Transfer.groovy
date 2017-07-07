@@ -1,6 +1,6 @@
 package se.tiny.bank
 
-class Transaction {
+class Transfer {
     Account debit
     Account credit
     long value

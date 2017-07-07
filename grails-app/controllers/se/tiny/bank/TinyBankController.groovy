@@ -5,9 +5,9 @@ class TinyBankController {
 
     def mailService
 
-    def transactions() {}
+    def transfers() {}
 
-    def listTransactions() {}
+    def listTransfers() {}
 
     def pay() {}
 
@@ -19,8 +19,10 @@ class TinyBankController {
         if (cr.balance >= amount) {
             dr.balance += amount
             cr.balance -= amount
-            Transaction tr = new Transaction(debit: dr, credit: cr, value: amount).save()
+            Transfer tr = new Transfer(debit: dr, credit: cr, value: amount).save()
+
             saveAll(dr, cr, tr)
+
             sendDebitConfirmation(tr)
             sendCreditConfirmation(tr)
         }
@@ -33,7 +35,7 @@ class TinyBankController {
         data.each { it.save(flush: true) }
     }
 
-    private void sendCreditConfirmation(Transaction transaction) {
+    private void sendCreditConfirmation(Transfer transaction) {
         mailService.sendMail {
             to transaction.credit.email
             from FROM_EMAIL
@@ -42,7 +44,7 @@ class TinyBankController {
         }
     }
 
-    private void sendDebitConfirmation(Transaction transaction) {
+    private void sendDebitConfirmation(Transfer transaction) {
         mailService.sendMail {
             to transaction.debit.email
             from FROM_EMAIL

@@ -8,11 +8,11 @@
 <body>
 <div style="padding:10px;">
     <i style="color: #18aa81">${request.message}</i>
-    <h2>Transactions</h2>
+    <h2>Transfers</h2>
     <g:link action="pay">Pay someone</g:link>
     <br/>
     <br/>
-    <g:form name="transaction" action="listTransactions">
+    <g:form name="transaction" action="listTransfers">
         <b>Person:</b>
         <g:select name="account.id"
                   from="${Account.list()}"
