@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>See transactions</title>
+    <title>See transfers</title>
     <meta name="layout" content="main" />
 </head>
 <body>
@@ -12,14 +12,14 @@
     <g:link action="pay">Pay someone</g:link>
     <br/>
     <br/>
-    <g:form name="transaction" action="listTransfers">
+    <g:form name="transfers" action="listTransfers">
         <b>Person:</b>
         <g:select name="account.id"
                   from="${Account.list()}"
                   optionKey="id"
                   optionValue="${{it.name + " : £" + it.balance}}"
                   noSelection="['':'-Choose account name-']"/>
-        <input type="submit" value="Show transactions">
+        <input type="submit" value="Show transfers">
     </g:form>
 </div>
 </body>

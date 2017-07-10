@@ -50,7 +50,7 @@ environments {
                testWhileIdle = true
                testOnReturn = false
                jdbcInterceptors = "ConnectionState"
-               defaultTransferIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
+               defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
             }
         }
     }

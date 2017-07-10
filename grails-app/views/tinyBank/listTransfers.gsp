@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>See transactions</title>
+    <title>See transfers</title>
     <meta name="layout" content="main" />
 </head>
 <body>
@@ -12,14 +12,14 @@
     <g:link action="pay">Pay someone</g:link>
     <br/>
     <br/>
-    <g:form name="transaction" action="listTransfers">
+    <g:form name="transfer" action="listTransfers">
         <b>Person:</b>
         <g:select name="account.id"
                   from="${Account.list()}"
                   optionKey="id"
                   optionValue="${{it.name + " : £" + it.balance}}"
                   noSelection="['':'-Choose account name-']"/>
-        <input type="submit" value="Show transactions">
+        <input type="submit" value="Show transfers">
     </g:form>
 </div>
 <br/>
@@ -32,12 +32,12 @@
     </thead>
     <tbody>
         <g:set var="account" value="${Account.read(params.account.id as long)}"/>
-        <g:each in="${Transfer.findAllByCreditOrDebit(account, account)}" var="transaction">
+        <g:each in="${Transfer.findAllByCreditOrDebit(account, account)}" var="transfer">
             <tr>
-                <td>${transaction.id}</td>
-                <td>${transaction.credit.name}</td>
-                <td>${transaction.debit.name}</td>
-                <td>${transaction.value}</td>
+                <td>${transfer.id}</td>
+                <td>${transfer.credit.name}</td>
+                <td>${transfer.debit.name}</td>
+                <td>${transfer.value}</td>
             </tr>
         </g:each>
     </tbody>

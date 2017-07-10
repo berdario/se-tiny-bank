@@ -28,11 +28,11 @@ class TinyBankControllerSpec extends Specification {
 
     void "test Transfer has correct fields"() {
         given:
-            Transfer transaction = new Transfer()
+            Transfer transfer = new Transfer()
         expect:
-            transaction.hasProperty("debit")
-            transaction.hasProperty("credit")
-            transaction.hasProperty("value")
+            transfer.hasProperty("debit")
+            transfer.hasProperty("credit")
+            transfer.hasProperty("value")
     }
 
     void "test Account default balance"() {
@@ -52,15 +52,15 @@ class TinyBankControllerSpec extends Specification {
             params.cr = cr.id
             params.amt = 12
             controller.doPayment()
-            def transactions = Transfer.list()
+            def transfers = Transfer.list()
         then:
             dr.balance == 212
             cr.balance == 188
         and:
-            transactions.size() == 1
-            transactions[0].debit == dr
-            transactions[0].credit == cr
-            transactions[0].value == params.amt
+            transfers.size() == 1
+            transfers[0].debit == dr
+            transfers[0].credit == cr
+            transfers[0].value == params.amt
         and:
             view == '/tinyBank/pay'
 

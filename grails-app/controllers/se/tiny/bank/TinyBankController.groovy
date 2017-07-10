@@ -35,21 +35,21 @@ class TinyBankController {
         data.each { it.save(flush: true) }
     }
 
-    private void sendCreditConfirmation(Transfer transaction) {
+    private void sendCreditConfirmation(Transfer transfer) {
         mailService.sendMail {
-            to transaction.credit.email
+            to transfer.credit.email
             from FROM_EMAIL
-            subject "Credit transaction"
-            body "${transaction.value} was transferred from your account to ${transaction.debit.name}"
+            subject "Credit transfer"
+            body "${transfer.value} was transferred from your account to ${transfer.debit.name}"
         }
     }
 
-    private void sendDebitConfirmation(Transfer transaction) {
+    private void sendDebitConfirmation(Transfer transfer) {
         mailService.sendMail {
-            to transaction.debit.email
+            to transfer.debit.email
             from FROM_EMAIL
-            subject "Debit transaction"
-            body "${transaction.value} was transferred to your account from ${transaction.credit.name}"
+            subject "Debit transfer"
+            body "${transfer.value} was transferred to your account from ${transfer.credit.name}"
         }
     }
 }
